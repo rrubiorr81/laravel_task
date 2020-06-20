@@ -46,6 +46,8 @@ class NotificationController extends Controller
                 return response(['error' => $validator->errors(), 'Validation Error']);
             }
 
+            $data['user_id'] = $request->user()->id;
+
             $notification = Notification::create($data);
 
             return response(['notification' => new NotificationResource($notification), 'message' => 'Created successfully'], 200);

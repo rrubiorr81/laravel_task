@@ -55,4 +55,13 @@ class AuthController extends Controller
             return response(['message' => 'Error detected'], 500);
         }
     }
+
+    public function getInfo(Request $request)
+    {
+        try {
+            return response($request->user());
+        } catch (\Exception $exception) {
+            return response(['message' => 'Error detected.']);
+        }
+    }
 }
