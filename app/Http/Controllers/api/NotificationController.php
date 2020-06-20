@@ -7,6 +7,7 @@ use App\Http\Resources\NotificationResource;
 use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 
 class NotificationController extends Controller
@@ -20,7 +21,7 @@ class NotificationController extends Controller
     {
         try {
             $notifications = Notification::all();
-            return response([ 'notifications' => NotificationResource::collection($notifications), 'message' => 'Retrieved successfully'], 200);
+            return response(['notifications' => NotificationResource::collection($notifications), 'message' => 'Retrieved successfully'], 200);
         } catch (\Exception $errorException) {
             return response('Error detected', 500);
         }
@@ -29,7 +30,7 @@ class NotificationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -38,8 +39,9 @@ class NotificationController extends Controller
             $data = $request->all();
 
             $validator = Validator::make($data, [
-                'title' => 'required|max:255',
-                'description' => 'required|max:255',
+                'title' => 'required|min:5|max:255',
+                'description' => 'required|min:5|max:255',
+                'read' => 'between:0,1',
             ]);
 
             if ($validator->fails()) {
@@ -60,24 +62,38 @@ class NotificationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Notification  $notification
+     * @param  \App\Notification $notification
      * @return \Illuminate\Http\Response
      */
     public function show(Notification $notification)
     {
-        return response([ 'notification' => new NotificationResource($notification), 'message' => 'Retrieved successfully'], 200);
+        return response(['notification' => new NotificationResource($notification), 'message' => 'Retrieved successfully'], 200);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Notification  $notification
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Notification $notification
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Notification $notification)
     {
-        $notification->update($request->all());
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'title' => 'min:5|max:255',
+                'description' => 'min:5|max:255',
+                'read' => 'between:0,1',
+            ]);
+
+            if ($validator->fails()) {
+                return response(['error' => $validator->errors(), 'Validation Error']);
+            }
+            $notification->update($request->all());
+        } catch (\Exception $exception) {
+            return response('Error detected', 500);
+        }
 
         return response(['notification' => new NotificationResource($notification), 'message' => 'Retrieved successfully'], 200);
     }
@@ -90,8 +106,13 @@ class NotificationController extends Controller
      */
     public function destroy(Notification $notification)
     {
-        $notification->delete();
+        try {
+            $notification->delete();
+            return response(['message' => 'Successfully deleted notification']);
 
-        return response(['message' => 'Successfully deleted notification']);
+        } catch (\Exception $errorException) {
+            return response('Error detected', 500);
+        }
+
     }
 }
