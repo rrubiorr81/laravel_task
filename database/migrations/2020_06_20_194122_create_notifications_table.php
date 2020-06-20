@@ -18,8 +18,12 @@ class CreateNotificationsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('read')->default(false);
-            $table->integer('user_id');
+            $table->foreignId('user_id');
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('CASCADE');
         });
     }
 
