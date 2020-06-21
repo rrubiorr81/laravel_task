@@ -10,6 +10,11 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    /**
+     * Registering would create a user and return a token
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function register(Request $request)
     {
         try {
@@ -34,6 +39,12 @@ class AuthController extends Controller
 
     }
 
+
+    /**
+     * Login would check user credentials and return a token if valid.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function login(Request $request)
     {
         try {
@@ -56,6 +67,11 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * getInfo would return basic info provided by the user when registered.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function getInfo(Request $request)
     {
         try {
