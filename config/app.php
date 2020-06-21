@@ -123,6 +123,13 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'YELP_URL' => 'https://api.yelp.com/v3/',
+
+    'YELP_CLIENT_ID' => 'sXlhp-Oh5auYJvUE6H8yHQ',
+
+    'YELP_API_KEY' => '4Ydd9-Mh0Z2Ir3ep_tuP57Nvb_yObwLTP69GIgNAENJ_geO_YrjJbD-1LbyAPaI7gJEaWpsnJxjaSmQ-If1PXwpPBhLhEcMpMhff8MrgImFoWHI_Ly4llP5xy5TuXnYx',
+
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
