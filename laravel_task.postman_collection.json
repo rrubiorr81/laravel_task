@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "f9a489ab-90d5-4fa1-8c67-a30807488e2c",
+		"name": "Laravel Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Richard Rubio",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "lolo",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "lolo",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "rrubiorr85@gmail.com",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL_SERVER}}api/register",
+					"host": [
+						"{{LOCAL_SERVER}}api"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL_SERVER}}api/me",
+					"host": [
+						"{{LOCAL_SERVER}}api"
+					],
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "rrubiorr81@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "lola",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL_SERVER}}api/login",
+					"host": [
+						"{{LOCAL_SERVER}}api"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create notification",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "La fiesta del chivo",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "ah.. es una novela muy largaaa..",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{LOCAL_SERVER}}api/notification",
+					"host": [
+						"{{LOCAL_SERVER}}api"
+					],
+					"path": [
+						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update notification",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "read",
+							"value": "1",
+							"type": "text"
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": {
+					"raw": "{{LOCAL_SERVER}}api/notification/1",
+					"host": [
+						"{{LOCAL_SERVER}}api"
+					],
+					"path": [
+						"notification",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list notifications",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL_SERVER}}api/notification",
+					"host": [
+						"{{LOCAL_SERVER}}api"
+					],
+					"path": [
+						"notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBusinessInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL_SERVER}}api/getBusinessInfo/miami/lacarreta",
+					"host": [
+						"{{LOCAL_SERVER}}api"
+					],
+					"path": [
+						"getBusinessInfo",
+						"miami",
+						"lacarreta"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{aToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "dae3a5d1-7675-45cd-a776-a2227bffbf38",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "69598587-ca7f-4c07-9b58-d11320a1b8ff",
+				"type": "text/javascript",
+				"exec": [
+					"var jsonData = JSON.parse(responseBody);",
+					"",
+					"//if a access token is provided as part of the response, update it in this collection environment.",
+					"if(jsonData.access_token) {",
+					"    pm.environment.set(\"aToken\", jsonData.access_token);    ",
+					"}",
+					"",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "035b7eb9-c84c-47e0-9ff8-cc5262196588",
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMWYxMDJjNDcxMGEzN2Q1ZGU1OWU4ZjMwMDhiZDIyNDkyNjVhNzdjYWFhNTI3MzIxZmFkOTc0ODIyNTVlOWYxMDEwMWY1MmM5OTRiMGQ5OTQiLCJpYXQiOjE1OTI2ODczMTMsIm5iZiI6MTU5MjY4NzMxMywiZXhwIjoxNjI0MjIzMzEzLCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.XQJqNbg9wiQsNwwhXKDwGyNtt0oWf5s06jK5nQCfhtvbkav7SqgfB869VOl7a-W-RLdzHALbHaGjkCU4dtR7NVzEULx8XvIBYHBpxpBSTcug_b_oLEfFSbgR3gaZvKtgkDiXnxnZy38n58OQa2yydvAWqfAjDyOdMBJoABLrqhm4Dz4Co3yZDsSXn-XjfTQ1Xuu96E76_RS94Bytxj4bueYJiNt-ftnQuh7FMAevHr212su4vc3iJAoQPlJ48uPlvOhn1kNAaCUYdTYnfWexnfXtLnRzS0kcOMxw4HHGfstyq6XupxRJZB4aDQM4qAC5sXG_I8C1cuAfwV7ToerLckkRQYnCuDtlqzCJWmWQ46UoRZTA9qc-_eToK_lXEPsj-Ffxv_PdC74q0WMueWSiyF8rS0EGkiVrpVhox46XOf5KIRAhuC_v9Qqk9hLwGw3naU808qNygfGql_du6YFlCaNgE8oel3yjyzWvH3288etvmJHn-5cc16FDk9ldBhVtI-Ed1SQ2r8T_AKcuhGNTQlb1cpwueFtnlSLOSPghhvrC20EnLVOlN4jhJ8OYfnozN2iWqMP4x0YTxt63GagJdED1F8eXRjF9U0RR7NwEK4CmsZFoXoyl1U7W28eAtLe2GlW_owvrPmohHup8MkYsUD9479myTXg3M0vTx3x-MKM",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"id": "bb23da97-79ea-47e9-b4fc-1cbd7b3bedf6",
+			"key": "LOCAL_SERVER",
+			"value": "http://127.0.0.1:8001/",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
